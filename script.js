@@ -41,45 +41,45 @@ const CONFIG = {
   /* --- Section: The Letter (array = new paragraph) --- */
   letterTitle: "My Future Wife",
   letterMessage: [
-    "Dear [NAMA],",
+    "Dear Pacarku Tercinta,",
     "Aku susah ngomong perasaan di depan orang. Kalau ketemu langsung, biasanya aku cuma bisa bilang \"ya iyalah\" lalu diam. Jadi aku nulis di sini, biar nggak ada yang kepotong.",
     "Nama lengkapmu Ferra Fadhillah, tapi yang paling sering keluar dari mulut aku cuma satu: Beb. Entah kenapa, tiap kali mengucapkannya aku jadi lebih tenang.",
-    "Aku nggak punya rencana besar buat masa depan. Tapi aku pengen nemen kamu ngerasain semua versi kamu — yang lagi semangat, yang lagi capek, dan yang lagi ngakak sendiri.",
-    "Dari semua hari yang udah kita lewatin, aku paling suka yang paling biasa-biasa. Sarapan bareng, pulang bareng, chat panjang yang isinya cuma complain kecil. Dari situ aku tahu, aku nggak butuh hari dramatis buat bikin aku senang.",
-    "Terima kasih udah sabar sama aku. Terima kasih udah nemen aku ngeliat diri aku sendiri dengan lebih baik. Foto-foto di halaman ini bukan yang paling bagus dari kita, tapi itu yang paling sering aku buka.",
+    "Aku nggak punya rencana besar buat masa depan. Tapi aku pengen nemenin kamu ngerasain semua versi kamu — yang lagi semangat, yang lagi capek, dan yang lagi ngakak sendiri.",
+    "Dari semua hari yang udah kita lewatin, aku paling suka yang paling biasa-biasa. Makan bareng, ketawa bareng, chat panjang yang isinya cuma complain kecil. Dari situ aku tahu, aku nggak butuh hari dramatis buat bikin aku senang.",
+    "Terima kasih udah sabar sama aku. Terima kasih udah nemenin aku ngeliat diri aku sendiri dengan lebih baik. Foto-foto di halaman ini bukan yang paling bagus dari kita, tapi itu yang kadang buat aku mikir \"sudah sejauh ini ternyata\".",
     "Umur 26 itu masih awal, kok. Kamu masih punya banyak waktu buat nulis cerita yang jauh lebih panjang dari surat ini. Happy ulang tahun, Beb — semoga tahun ini lebih ringan, dan lebih banyak alasan buat senyum."
   ],
 
   /* --- Section: 26 Reasons (exactly 26 items) ---
-     Boleh string:  "Your smile"
-     Boleh object:  { title: "Your smile", note: "opsional, kecil & italic" } */
+     Boleh string:  "Senyummu"
+     Boleh object:  { title: "Senyummu", note: "opsional, kecil & italic" } */
   reasons: [
-    "Your smile",
-    "The way you laugh",
-    "Your little habits",
-    "How you care about the people you love",
-    "The way you say my name",
-    "Your sleepy voice",
-    "How you get excited over small things",
-    "Your terrible jokes that I secretly love",
-    "The face you make when you're concentrating",
-    "How you always notice when I'm tired",
-    "Your comfort food orders",
-    "The stories you tell about your day",
-    "How you forgive easily",
-    "Your soft heart",
-    "The way you hold my hand",
-    "How you make ordinary days feel special",
-    "Your random singing in the car",
-    "How you cheer for me even when I'm down",
-    "Your patience with me",
-    "The way you look when you're really happy",
-    "Your silly little dances",
-    "How you make me feel at home",
-    "Your honest opinions, even when they sting a little",
-    "The little texts you send when you're bored",
-    "How beautifully you love",
-    "Simply you — my favourite person"
+    "Senyummu",
+    "Caramu tertawa",
+    "Kebiasaan kecilmu",
+    "Caramu peduli pada orang-orang yang kamu sayangi",
+    "Caramu menyebut namaku",
+    "Suara kantukmu",
+    "Semangatmu atas hal-hal kecil",
+    "Lawakanmu yang jelek, tapi aku suka diam-diam",
+    "Wajahmu saat sedang berkonsentrasi",
+    "Kamu selalu sadar saat aku lelah",
+    "Pesanan makanan favoritmu",
+    "Cerita-ceritamu tentang harimu",
+    "Caramu yang mudah memaafkan",
+    "Hatimu yang lembut",
+    "Caramu menggenggam tanganku",
+    "Caramu membuat hari biasa jadi spesial",
+    "Nyanyian acakmu di mobil",
+    "Caramu menyemangatiku bahkan saat aku lagi jatuh",
+    "Kesabaranmu padaku",
+    "Rupamu saat benar-benar bahagia",
+    "Tarian kocakmu",
+    "Caramu membuatku merasa di rumah",
+    "Pendapatmu yang jujur, meski kadang sedikit perih",
+    "Pesan kecilmu saat bosan",
+    "Betapa indahnya kamu mencintai",
+    "Kamu saja — orang favoritku"
   ],
 
   /* --- Section: Memory Gallery ---
@@ -674,7 +674,7 @@ function renderReasons() {
 
     const text = document.createElement("p");
     text.className = "reason-text";
-    text.innerHTML = "<span class=\"visually-hidden\">Reason " + (index + 1) + ": </span>" + escapeHtml(title);
+    text.innerHTML = "<span class=\"visually-hidden\">Alasan " + (index + 1) + ": </span>" + escapeHtml(title);
 
     if (note) {
       const small = document.createElement("span");
