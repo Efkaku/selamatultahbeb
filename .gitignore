@@ -17,3 +17,7 @@ desktop.ini
 # langsung dari repo. Kalau MP3-mu lebih dari 100 MB, GitHub akan
 # menolak push-nya (batas per-file), lalu pindahkan musiknya ke host
 # lain atau perkecil dulu filenya.
+
+# Original RAW (22 MB) disimpan lokal saja supaya repo tetap ringan.
+# Yang di-push hanya versi sudah dikompres di assets/photos/.
+assets/_originals/

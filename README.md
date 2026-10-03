@@ -87,22 +87,30 @@ Line breaks are preserved.
 
 ## Photos
 
-Drop your pictures into `assets/photos/`, replacing the sample ones. Keep the
-filenames and nothing else needs to change:
+Nine photos live in `assets/photos/`, named in chronological order so the
+scrapbook reads like a timeline:
 
 ```
-photo-01.jpg   photo-02.jpg   photo-03.jpg   photo-04.jpg
-photo-05.jpg   photo-06.jpg   photo-07.jpg   photo-08.jpg
+photo-01.jpg   photo-02.jpg   photo-03.jpg   photo-04.jpg   photo-05.jpg
+photo-06.jpg   photo-07.jpg   photo-08.jpg   photo-09.jpg
 ```
 
-To use more or fewer than 8, edit `gallery` in `CONFIG`:
+To swap in your own, replace the files and keep the names — nothing else
+changes. Captions and any other count live in `CONFIG.photos`:
 
 ```js
-gallery: [
-  { src: "./assets/photos/photo-01.jpg", caption: "the day we met" },
+photos: [
+  { src: "./assets/photos/photo-01.jpg", caption: "wal pertama kita" },
   ...
 ],
 ```
+
+Add or remove entries freely; the gallery is a grid, so 6, 9 or 12 photos all
+lay out cleanly.
+
+The full-size originals (22 MB) are kept in `assets/_originals/`, which is
+git-ignored on purpose — only the compressed versions (~1.1 MB total, max
+edge 1280 px) are pushed, so the site loads fast on mobile data.
 
 Photos are soft-focused and gently desaturated, so mixed lighting still looks
 intentional. Anything that fails to load falls back to a painted placeholder
@@ -116,9 +124,10 @@ instead of a broken image icon.
    somewhere else.
 2. Turn the corner speaker on, bottom-right.
 
-Nothing plays automatically and no request is made until you press play, so a
-missing file never breaks the page. If the track can't be found, the button
-disables itself and tells you where to put the file, then stays out of your way.
+The current track is `background.mp3` (~3:50, "One Less Lonely Girl"). Nothing
+plays automatically and no request is made until you press play, so a missing
+file never breaks the page. If the track can't be found, the button disables
+itself and tells you where to put the file, then stays out of your way.
 
 Prefer a different file type? Change the `type` attribute on the `<audio>`
 element in `index.html` to match.
@@ -170,9 +179,10 @@ rather than a time of day:
 index.html                 structure and content
 style.css                  all visual design
 script.js                  CONFIG + all behaviour
-assets/photos/             your 8 photos
+assets/photos/             your 9 photos (compressed, pushed)
 assets/music/              optional MP3
 assets/icons/              optional extras
+assets/_originals/         full-size originals, git-ignored
 ```
 
 Change the words, drop in your photos, and it's hers.

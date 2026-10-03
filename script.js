@@ -81,16 +81,19 @@ const CONFIG = {
 
   /* --- Section: Memory Gallery ---
      Taruh file fotonya di ./assets/photos/ lalu ubah src-nya.
-     Relative path WAJIB (./assets/...) supaya aman di GitHub Pages. */
+     Relative path WAJIB (./assets/...) supaya aman di GitHub Pages.
+     Urutannya kronologis, dari yang paling lama. Jumlah bebas —
+     galeri ini grid, jadi 6/9/12 foto tetap rapi. */
   photos: [
-    { src: "./assets/photos/photo-01.jpg", caption: "our first little trip" },
-    { src: "./assets/photos/photo-02.jpg", caption: "the day you laughed until you cried" },
-    { src: "./assets/photos/photo-03.jpg", caption: "random afternoon, favourite memory" },
-    { src: "./assets/photos/photo-04.jpg", caption: "you, being you" },
-    { src: "./assets/photos/photo-05.jpg", caption: "coffee and long talks" },
-    { src: "./assets/photos/photo-06.jpg", caption: "that one sunset" },
-    { src: "./assets/photos/photo-07.jpg", caption: "silly photos we pretended were serious" },
-    { src: "./assets/photos/photo-08.jpg", caption: "and many more to come" }
+    { src: "./assets/photos/photo-01.jpg", caption: "wal pertama kita" },
+    { src: "./assets/photos/photo-02.jpg", caption: "hari yang nggak pernah aku lupa" },
+    { src: "./assets/photos/photo-03.jpg", caption: "candaan dan tawa paling lucu" },
+    { src: "./assets/photos/photo-04.jpg", caption: "foto random, tetap favorit" },
+    { src: "./assets/photos/photo-05.jpg", caption: "momen kecil hari itu" },
+    { src: "./assets/photos/photo-06.jpg", caption: "hari yang paling aku ingat" },
+    { src: "./assets/photos/photo-07.jpg", caption: "selfie time, like always" },
+    { src: "./assets/photos/photo-08.jpg", caption: "kita, dalam versi terbaik kita" },
+    { src: "./assets/photos/photo-09.jpg", caption: "dan masih banyak cerita lain" }
   ],
 
   /* --- Section: Final Surprise --- */
