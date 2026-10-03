@@ -1,0 +1,10 @@
+# Simpan file web dengan line ending LF, apa pun OS-nya.
+# Ini mencegah diffeny dan upload yang berubah-ubah tidak berguna.
+* text=auto eol=lf
+
+# Foto & audio: jangan pernah disentuh newline/encoding.
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.webp binary
+*.mp3 binary

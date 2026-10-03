@@ -1,0 +1,19 @@
+# File junk dari sistem operasi
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Log
+*.log
+
+# CATATAN PENTING:
+# assets/photos/ dan assets/music/ SENGAJA tidak di-ignore.
+# File foto dan MP3 ikut di-push karena GitHub Pages membacanya
+# langsung dari repo. Kalau MP3-mu lebih dari 100 MB, GitHub akan
+# menolak push-nya (batas per-file), lalu pindahkan musiknya ke host
+# lain atau perkecil dulu filenya.

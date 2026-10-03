@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="id" data-phase="day" class="no-fade">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy 26th Birthday — A Little Garden For You</title>
+<meta name="description" content="A little garden that changes with time. A small birthday website made with a lot of love.">
+<meta name="theme-color" content="#8fc8ee">
+<meta name="color-scheme" content="light dark">
+
+<!-- Inline favicon so there is never a 404 request for /favicon.ico -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%8C%B7%3C/text%3E%3C/svg%3E">
+
+<!-- Optional web fonts. If offline / blocked, the CSS fallback stack is used. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Quicksand:wght@400;500;600;700&display=swap">
+
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Langsung ke konten utama</a>
+
+<!-- =========================================================
+     AMBIENT GARDEN — fixed background layer that lives behind
+     every section. Theme is driven by data-phase on <html>
+     and the --night / --day custom properties from script.js.
+     ========================================================= -->
+<div class="garden" aria-hidden="true">
+  <div class="sky" id="sky"></div>
+  <div class="sky-haze" id="skyHaze"></div>
+
+  <div class="stars" id="stars"></div>
+
+  <div class="celestial">
+    <div class="sun" id="sun">
+      <span class="sun-core"></span>
+      <span class="sun-halo"></span>
+    </div>
+    <div class="moon" id="moon">
+      <span class="moon-body">
+        <span class="moon-crater c1"></span>
+        <span class="moon-crater c2"></span>
+        <span class="moon-crater c3"></span>
+      </span>
+      <span class="moon-halo"></span>
+    </div>
+  </div>
+
+  <div class="clouds" id="clouds">
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+    <div class="cloud cloud-4"></div>
+  </div>
+
+  <div class="shooting-star" id="ambientShootingStar"></div>
+
+  <div class="fireflies" id="fireflies"></div>
+  <div class="creatures" id="creatures"></div>
+  <div class="pollen" id="pollen"></div>
+
+  <div class="hills">
+    <span class="hill hill-far"></span>
+    <span class="hill hill-mid"></span>
+    <span class="hill hill-near"></span>
+  </div>
+
+  <div class="ground">
+    <div class="grass" id="grass"></div>
+    <div class="flowers" id="flowers"></div>
+  </div>
+
+  <div class="ground-fade"></div>
+</div>
+
+<!-- Soft warm/cinematic wash used by the Golden Hour sequence -->
+<div class="cinematic-wash" aria-hidden="true"></div>
+
+<!-- =========================================================
+     MUSIC CONTROLS
+     ========================================================= -->
+<div class="music">
+  <button
+    class="music-btn"
+    id="musicBtn"
+    type="button"
+    aria-pressed="false"
+    aria-label="Putar musik latar"
+    title="Musik latar">
+    <span class="music-icon" id="musicIcon" aria-hidden="true">🔊</span>
+    <span class="music-text" id="musicText">Music</span>
+  </button>
+
+  <button
+    class="music-btn music-vol-btn"
+    id="musicVolToggle"
+    type="button"
+    aria-label="Atur volume musik"
+    aria-controls="musicPanel"
+    aria-expanded="false"
+    title="Volume">
+    <span aria-hidden="true">🎚</span>
+  </button>
+
+  <div class="music-panel" id="musicPanel" hidden>
+    <label class="music-label" for="musicVolume">Volume</label>
+    <input
+      class="music-range"
+      id="musicVolume"
+      type="range"
+      min="0"
+      max="100"
+      step="1"
+      value="35"
+      aria-label="Volume musik">
+    <p class="music-note" id="musicNote"></p>
+  </div>
+</div>
+
+<!-- No src here on purpose: the music file is only requested after the
+     visitor presses play, so a missing track never logs a 404. -->
+<audio id="bgm" loop preload="none"></audio>
+
+<main id="main">
+
+  <!-- =======================================================
+       1. HERO
+       ======================================================= -->
+  <section class="hero" id="top" aria-labelledby="heroTitle">
+    <div class="hero-inner">
+      <p class="hero-kicker" data-reveal><span id="heroKickerAge">26</span> · a new little chapter</p>
+
+      <h1 class="hero-title" data-reveal id="heroTitle">
+        Happy <span id="heroAge">26</span>th Birthday
+      </h1>
+
+      <p class="hero-name" data-reveal>
+        <span id="heroName" class="js-name">[NAMA]</span>
+        <span class="hero-name-heart" aria-hidden="true">♡</span>
+      </p>
+
+      <p class="hero-subtitle" data-reveal>
+        A little website, made with a lot of love. <span aria-hidden="true">❤️</span>
+      </p>
+
+      <button class="btn btn-primary hero-cta" data-reveal type="button" id="startJourney">
+        Start the Journey
+        <span class="btn-arrow" aria-hidden="true">↓</span>
+      </button>
+    </div>
+
+    <p class="hero-scroll-hint" id="scrollHint" aria-hidden="true">
+      <span class="hero-scroll-line"></span>
+      scroll slowly
+    </p>
+  </section>
+
+  <!-- =======================================================
+       2. A LITTLE MESSAGE
+       ======================================================= -->
+  <section class="section section-message" id="message" aria-labelledby="messageTitle">
+    <div class="panel panel-note" data-reveal>
+      <h2 class="section-title" id="messageTitle">A Little Message For You <span aria-hidden="true">💌</span></h2>
+
+      <div class="note">
+        <p class="note-dear">Dearest <span class="js-name">[NAMA]</span>,</p>
+
+        <div class="note-body" id="messageBody"><!-- filled from CONFIG.birthdayMessage --></div>
+
+        <p class="note-sign">
+          With all my love,<br>
+          <span class="note-from">— Me</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================
+       3. 26 THINGS I LOVE ABOUT YOU
+       ======================================================= -->
+  <section class="section section-reasons" id="reasons" aria-labelledby="reasonsTitle">
+    <div class="panel" data-reveal>
+      <h2 class="section-title" id="reasonsTitle">
+        <span id="reasonsCount">26</span> Things I Love About You <span aria-hidden="true">🌷</span>
+      </h2>
+      <p class="section-lead">
+        Twenty-six little reasons, written down so you can keep them.
+      </p>
+    </div>
+
+    <div class="reasons-grid" id="reasonsGrid" role="list">
+      <!-- filled from CONFIG.reasons -->
+    </div>
+  </section>
+
+  <!-- =======================================================
+       4. MEMORY GALLERY
+       ======================================================= -->
+  <section class="section section-gallery" id="memories" aria-labelledby="galleryTitle">
+    <div class="panel" data-reveal>
+      <h2 class="section-title" id="galleryTitle">Little Memories <span aria-hidden="true">📸</span></h2>
+      <p class="section-lead">
+        Some frames I keep playing back in my head.
+      </p>
+    </div>
+
+    <div class="scrapbook" id="scrapbook">
+      <!-- filled from CONFIG.photos -->
+    </div>
+  </section>
+
+  <!-- =======================================================
+       5. THE LETTER (with cinematic Golden Hour transition)
+       ======================================================= -->
+  <section class="section section-letter" id="letter" aria-labelledby="letterTitle" data-step="day">
+    <div class="letter-sky" aria-hidden="true">
+      <span class="letter-sky-layer letter-sky-day"></span>
+      <span class="letter-sky-layer letter-sky-golden"></span>
+      <span class="letter-sky-layer letter-sky-night"></span>
+      <span class="letter-sun"></span>
+      <span class="letter-hills"></span>
+      <span class="letter-stars"></span>
+      <span class="letter-moon"></span>
+    </div>
+
+    <div class="panel panel-intro" data-reveal>
+      <h2 class="section-title" id="letterTitle">There is something I want to tell you...</h2>
+      <p class="section-lead">I wrote it down, so I don't get too shy to say it out loud.</p>
+    </div>
+
+    <div class="envelope-stage">
+      <div class="envelope" id="envelope">
+        <button
+          class="envelope-btn"
+          id="envelopeBtn"
+          type="button"
+          aria-expanded="false"
+          aria-controls="letterPaper">
+          <span class="env-back" aria-hidden="true"></span>
+          <span class="env-paper" aria-hidden="true">
+            <span class="env-paper-line"></span>
+            <span class="env-paper-line"></span>
+            <span class="env-paper-line"></span>
+            <span class="env-paper-seal">♥</span>
+          </span>
+          <span class="env-flap" aria-hidden="true"></span>
+          <span class="env-front" aria-hidden="true">
+            <span class="env-front-heart" aria-hidden="true">❤</span>
+          </span>
+          <span class="env-cta">Open the Letter</span>
+        </button>
+
+        <article
+          class="letter-paper"
+          id="letterPaper"
+          tabindex="-1"
+          aria-labelledby="letterPaperTitle">
+          <h3 class="letter-paper-title" id="letterPaperTitle">A Letter For You</h3>
+          <div class="letter-paper-body" id="letterBody"><!-- filled from CONFIG.letter --></div>
+          <p class="letter-paper-sign">Happy birthday, sayang. <span aria-hidden="true">❤️</span></p>
+          <button class="btn btn-ghost letter-close" id="letterClose" type="button">Close the letter</button>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================
+       6. FINAL SURPRISE — Night Garden
+       ======================================================= -->
+  <section class="section section-finale" id="finale" aria-labelledby="finaleTitle">
+    <div class="finale-scene" aria-hidden="true">
+      <span class="finale-sky"></span>
+      <span class="finale-stars" id="finaleStars"></span>
+      <span class="finale-moon"></span>
+      <span class="finale-hills"></span>
+      <span class="finale-flowers" id="finaleFlowers"></span>
+      <span class="finale-fireflies" id="finaleFireflies"></span>
+      <span class="finale-shooting" id="finaleShooting"></span>
+      <span class="finale-wind w1"></span>
+      <span class="finale-wind w2"></span>
+    </div>
+
+    <div class="finale-content">
+      <p class="finale-eyebrow">
+        <span class="finale-step" data-step="1">one last thing</span>
+      </p>
+
+      <h2 class="finale-title" id="finaleTitle">
+        <span class="finale-step" data-step="2">Happy <span id="finaleAge">26</span>th Birthday, <span class="js-name">[NAMA]</span> <span aria-hidden="true">❤️</span></span>
+      </h2>
+
+      <p class="finale-lead">
+        <span class="finale-step" data-step="3">I hope I get to celebrate many more birthdays with you.</span>
+      </p>
+
+      <div class="finale-cta finale-step" data-step="5">
+        <button class="btn btn-primary" id="surpriseBtn" type="button">
+          One Last Surprise <span aria-hidden="true">✨</span>
+        </button>
+      </div>
+
+      <div class="finale-message" id="finaleMessage" aria-live="polite">
+        <p class="finale-message-text" id="finaleMessageText"></p>
+        <p class="finale-message-ps">— always, me</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>
+    Made by hand, in a hurry, with a whole lot of love
+    <span aria-hidden="true">🌙</span><br>
+    <span class="footer-small">Happy <span id="footerAge">26</span>th birthday, <span class="js-name">[NAMA]</span>.</span>
+  </p>
+</footer>
+
+<!-- Particle layers for the final surprise -->
+<div class="fx-layer" id="confettiLayer" aria-hidden="true"></div>
+<div class="fx-layer fx-hearts" id="heartsLayer" aria-hidden="true"></div>
+
+<noscript>
+  <p class="noscript-note">
+    This little garden needs JavaScript to grow its flowers. Please enable JavaScript to see the full experience.
+  </p>
+</noscript>
+
+<script src="./script.js"></script>
+</body>
+</html>
