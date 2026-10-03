@@ -24,8 +24,9 @@
 
 const CONFIG = {
 
-  /* --- who is this for --- */
-  girlfriendName: "[NAMA]",
+  /* --- who is this for ---
+     Nama lengkapnya Ferra Fadhillah, tapi dia lebih suka dipanggil Beb. */
+  girlfriendName: "Beb",
   birthdayAge: 26,
 
   /* --- Section: A Little Message (array = new paragraph) --- */
@@ -41,10 +42,14 @@ const CONFIG = {
   letterTitle: "A Letter For You",
   letterMessage: [
     "Dear [NAMA],",
-    "[Tulis surat personal kamu di sini. Contoh: Aku nggak selalu pandai bicara hal-hal besar di depan orang banyak, tapi di halaman ini aku bisa jujur — aku ingin kamu tahu betapa besar artinya kamu ada dalam hidupku, dan aku ingin terus begitu.",
-    "Semoga di umur yang baru ini, kamu tahu bahwa kamu selalu tempat pulang yang paling tenang untukku.",
-    "Thank you for being part of my life.",
-    "Happy birthday, sayang. ❤️"
+    "Aku termasuk orang yang susah ngomong perasaan di depan orang. Kalau ketemu langsung, biasanya aku cuma bisa bilang \"ya iyalah\" lalu diam. Jadi aku nulis di sini, biar nggak ada yang kepotong di tengah jalan.",
+    "Nama lengkapmu Ferra Fadhillah, tapi yang paling sering keluar dari mulut aku cuma satu: Beb. Dan entah kenapa, tiap kali mengucapkannya aku jadi lebih tenang.",
+    "Aku nggak punya rencana besar untuk masa depan. Tapi aku tahu satu hal: aku pengen nemen kamu ngerasain semua versi kamu — yang lagi semangat, yang lagi capek, yang lagi sedih, dan yang lagi ngakak sendiri.",
+    "Dari semua hari yang udah kita lewatin, aku paling suka yang paling biasa-biasa. Sarapan bareng, pulang bareng, chat panjang yang isinya cuma complain kecil. Dari situlah aku tahu, aku nggak butuh hari yang dramatis buat bikin aku senang.",
+    "Terima kasih udah sabar sama aku. Terima kasih udah nemen aku ngeliat diri aku sendiri dengan lebih baik, dan lebih jujur.",
+    "Foto-foto di halaman ini bukan yang paling bagus dari kita. Itu yang paling sering aku buka, karena di sana kamu masih jadi kamu — masih bisa bikin hari biasa terasa lebih enak.",
+    "Umur 26 itu masih awal, kok. Kamu masih punya banyak waktu buat nulis cerita yang jauh lebih panjang dari surat ini.",
+    "Happy ulang tahun, Beb. Semoga tahun ini lebih ringan buat kamu, dan lebih banyak alasan buat senyum."
   ],
 
   /* --- Section: 26 Reasons (exactly 26 items) ---
