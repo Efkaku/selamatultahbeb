@@ -39,17 +39,15 @@ const CONFIG = {
   ],
 
   /* --- Section: The Letter (array = new paragraph) --- */
-  letterTitle: "A Letter For You",
+  letterTitle: "My Future Wife",
   letterMessage: [
     "Dear [NAMA],",
-    "Aku termasuk orang yang susah ngomong perasaan di depan orang. Kalau ketemu langsung, biasanya aku cuma bisa bilang \"ya iyalah\" lalu diam. Jadi aku nulis di sini, biar nggak ada yang kepotong di tengah jalan.",
-    "Nama lengkapmu Ferra Fadhillah, tapi yang paling sering keluar dari mulut aku cuma satu: Beb. Dan entah kenapa, tiap kali mengucapkannya aku jadi lebih tenang.",
-    "Aku nggak punya rencana besar untuk masa depan. Tapi aku tahu satu hal: aku pengen nemen kamu ngerasain semua versi kamu — yang lagi semangat, yang lagi capek, yang lagi sedih, dan yang lagi ngakak sendiri.",
-    "Dari semua hari yang udah kita lewatin, aku paling suka yang paling biasa-biasa. Sarapan bareng, pulang bareng, chat panjang yang isinya cuma complain kecil. Dari situlah aku tahu, aku nggak butuh hari yang dramatis buat bikin aku senang.",
-    "Terima kasih udah sabar sama aku. Terima kasih udah nemen aku ngeliat diri aku sendiri dengan lebih baik, dan lebih jujur.",
-    "Foto-foto di halaman ini bukan yang paling bagus dari kita. Itu yang paling sering aku buka, karena di sana kamu masih jadi kamu — masih bisa bikin hari biasa terasa lebih enak.",
-    "Umur 26 itu masih awal, kok. Kamu masih punya banyak waktu buat nulis cerita yang jauh lebih panjang dari surat ini.",
-    "Happy ulang tahun, Beb. Semoga tahun ini lebih ringan buat kamu, dan lebih banyak alasan buat senyum."
+    "Aku susah ngomong perasaan di depan orang. Kalau ketemu langsung, biasanya aku cuma bisa bilang \"ya iyalah\" lalu diam. Jadi aku nulis di sini, biar nggak ada yang kepotong.",
+    "Nama lengkapmu Ferra Fadhillah, tapi yang paling sering keluar dari mulut aku cuma satu: Beb. Entah kenapa, tiap kali mengucapkannya aku jadi lebih tenang.",
+    "Aku nggak punya rencana besar buat masa depan. Tapi aku pengen nemen kamu ngerasain semua versi kamu — yang lagi semangat, yang lagi capek, dan yang lagi ngakak sendiri.",
+    "Dari semua hari yang udah kita lewatin, aku paling suka yang paling biasa-biasa. Sarapan bareng, pulang bareng, chat panjang yang isinya cuma complain kecil. Dari situ aku tahu, aku nggak butuh hari dramatis buat bikin aku senang.",
+    "Terima kasih udah sabar sama aku. Terima kasih udah nemen aku ngeliat diri aku sendiri dengan lebih baik. Foto-foto di halaman ini bukan yang paling bagus dari kita, tapi itu yang paling sering aku buka.",
+    "Umur 26 itu masih awal, kok. Kamu masih punya banyak waktu buat nulis cerita yang jauh lebih panjang dari surat ini. Happy ulang tahun, Beb — semoga tahun ini lebih ringan, dan lebih banyak alasan buat senyum."
   ],
 
   /* --- Section: 26 Reasons (exactly 26 items) ---
@@ -928,6 +926,7 @@ function openLetter() {
 
   clearLetterTimers();
   letter.envelope.classList.add("is-open");
+  if (letter.section) { letter.section.classList.add("is-reading"); }
   letter.button.setAttribute("aria-expanded", "true");
   letter.button.setAttribute("aria-label", "Surat sudah dibuka");
 
@@ -943,6 +942,7 @@ function closeLetter() {
 
   clearLetterTimers();
   letter.envelope.classList.remove("is-open");
+  if (letter.section) { letter.section.classList.remove("is-reading"); }
   letter.button.setAttribute("aria-expanded", "false");
   letter.button.setAttribute("aria-label", "Buka surat ulang tahun");
   stopGoldenHourSequence();

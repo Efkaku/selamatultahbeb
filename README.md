@@ -72,8 +72,13 @@ lines freely.
 ```js
 birthdayMessage: [ "first paragraph", "second paragraph", "..." ],
 letterMessage:   [ "Dear [NAMA],", "the body of your letter", "..." ],
-letterTitle: "A Letter For You",
+letterTitle: "My Future Wife",
 ```
+
+The paper has a height cap (`max-height: min(78vh, 620px)` in `.letter-paper`)
+and only the body scrolls, so the title, the sign-off and the close button stay
+put no matter how long the letter gets. Longer letters just mean more scrolling
+inside the paper.
 
 ### 5. The final surprise
 
