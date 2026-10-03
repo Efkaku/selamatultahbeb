@@ -70,7 +70,7 @@ const CONFIG = {
     "Hatimu yang lembut",
     "Caramu menggenggam tanganku",
     "Caramu membuat hari biasa jadi spesial",
-    "Nyanyian acakmu di mobil",
+    "Nyanyian acakmu di atas motor",
     "Caramu menyemangatiku bahkan saat aku lagi jatuh",
     "Kesabaranmu padaku",
     "Rupamu saat benar-benar bahagia",
