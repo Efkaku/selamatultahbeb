@@ -1975,6 +1975,7 @@ main {
 
   .envelope { width: min(360px, 86vw); }
   .envelope-stage { padding-block: 2.5rem 3rem; }
+  .section-letter.is-reading .envelope-stage { min-height: 0; padding-block: 2rem 2.5rem; }
   .env-cta { bottom: -2.9em; font-size: .88rem; }
   .letter-paper {
     position: relative;
@@ -1985,7 +1986,16 @@ main {
     width: 100%;
     margin-top: 2.5rem;
     transform: translate3d(0, 40px, 0) scale(.95);
-    max-height: min(82vh, 640px);
+    max-height: min(74vh, 560px);
+  }
+  .envelope .letter-paper,
+  .envelope.is-open .letter-paper { top: auto; bottom: auto; translate: none; }
+  .envelope:not(.is-open) .letter-paper {
+    max-height: 0;
+    padding-block: 0;
+    margin-top: 0;
+    overflow: hidden;
+    transform: translate3d(0, 40px, 0) scale(.95);
   }
   .envelope.is-open .letter-paper { transform: none; }
   .letter-paper::before { inset: 8px; }
