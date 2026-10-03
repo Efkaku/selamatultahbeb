@@ -111,7 +111,7 @@ const CONFIG = {
 
   /* --- Music --- */
   music: {
-    src: "./assets/music/background.mp3",
+    src: "./assets/music/sparkle.mp3",
     defaultVolume: 0.35,
     rememberPreference: true
   },
@@ -932,9 +932,29 @@ function openLetter() {
 
   playGoldenHourSequence();
 
+  /* Once the paper has finished growing: put it on screen (on a phone
+     it lives below the fold) and hand it the focus for keyboard users. */
   letter.timers.push(window.setTimeout(function () {
     if (letter.paper) { letter.paper.focus({ preventScroll: true }); }
+    revealInViewport(letter.paper, "smooth");
   }, 2600));
+}
+
+/* Scrolls just enough to make `element` fully visible, centred when it
+   fits and top-aligned when it does not. Does nothing if it already is. */
+function revealInViewport(element, behavior) {
+  if (!element) { return; }
+
+  const rect = element.getBoundingClientRect();
+  if (rect.top >= 8 && rect.bottom <= window.innerHeight - 8) { return; }
+
+  const offset = Math.max(16, (window.innerHeight - rect.height) / 2);
+  const target = Math.max(0, window.scrollY + rect.top - offset);
+
+  window.scrollTo({
+    top: target,
+    behavior: (behavior === "smooth" && !prefersReducedMotion()) ? "smooth" : "auto"
+  });
 }
 
 function closeLetter() {
@@ -947,6 +967,8 @@ function closeLetter() {
   letter.button.setAttribute("aria-label", "Buka surat ulang tahun");
   stopGoldenHourSequence();
   letter.button.focus({ preventScroll: true });
+  /* The page just got shorter — put the envelope back on screen. */
+  revealInViewport(letter.envelope, "auto");
 }
 
 /* Day -> Golden Hour -> Night, played gently behind the letter. */
@@ -974,7 +996,13 @@ function stopGoldenHourSequence() {
 
 
 /* =============================================================
-   8. MUSIC  (optional, never autoplays without a click)
+   8. MUSIC
+   ---------------------------------------------------------------
+   The <audio> tag already points at the file with preload="auto", so
+   the track is buffering while the page paints and the first play()
+   has nothing to wait for. We try to start on load (browsers allow it
+   on a returning visit) and, if the browser refuses, start on the
+   visitor's very first gesture instead.
    ============================================================= */
 
 const music = {
@@ -986,15 +1014,9 @@ const music = {
   volumeInput: null,
   note: null,
   available: true,
-  isPlaying: false
+  isPlaying: false,
+  gestureArmed: false
 };
-
-/* Only try to resume automatically if we have seen this track work
-   before. Otherwise every visit would fire a request for a file the
-   visitor never added. */
-function rememberTrackWorks() {
-  if (CONFIG.music.rememberPreference) { writeStorage("bg26:trackOK", "1"); }
-}
 
 function initializeMusic() {
   music.element = $("#bgm");
@@ -1017,7 +1039,7 @@ function initializeMusic() {
 
   music.element.addEventListener("error", handleMusicUnavailable);
   music.element.addEventListener("ended", function () { setMusicState(false); });
-  music.element.addEventListener("playing", rememberTrackWorks);
+  music.element.addEventListener("playing", function () { setMusicState(true); });
 
   music.button.addEventListener("click", function () {
     if (!music.available) { return; }
@@ -1046,21 +1068,57 @@ function initializeMusic() {
     });
   }
 
-  /* If the visitor played music before AND we know the file exists,
-     try to resume. Browsers block unprompted audio, so failing here is
-     expected and harmless. */
-  if (CONFIG.music.rememberPreference
-      && readStorage("bg26:music") === "on"
-      && readStorage("bg26:trackOK") === "1") {
+  /* Start right away unless the visitor turned the music off before.
+     Autoplay may be refused — that is normal, and armGestureAutoplay()
+     picks it up on their first tap, click or scroll. */
+  if (readStorage("bg26:music") !== "off") {
     startMusic(true);
   }
 }
 
+/* Called when the browser blocked an autoplay attempt: the next touch
+   anywhere on the page starts the music instead. */
+function armGestureAutoplay() {
+  if (music.gestureArmed || !music.available) { return; }
+  music.gestureArmed = true;
+
+  const events = ["pointerdown", "mousedown", "touchstart", "keydown", "wheel", "scroll"];
+
+  function disarm() {
+    music.gestureArmed = false;
+    events.forEach(function (name) {
+      window.removeEventListener(name, onGesture, true);
+    });
+  }
+
+  function onGesture(event) {
+    /* Reaching for the music controls? Let the button itself decide. */
+    const controls = $(".music");
+    if (controls && event.target && controls.contains(event.target)) {
+      disarm();
+      return;
+    }
+
+    disarm();
+
+    if (!music.available || music.isPlaying) { return; }
+    if (CONFIG.music.rememberPreference && readStorage("bg26:music") === "off") { return; }
+    startMusic(true);
+  }
+
+  events.forEach(function (name) {
+    window.addEventListener(name, onGesture, { capture: true, passive: true });
+  });
+}
+
 function startMusic(silent) {
-  /* The file is attached on the very first play, not before, so simply
-     opening the page never asks for a track that may not exist. */
-  if (!music.element.getAttribute("src")) {
-    music.element.src = CONFIG.music.src;
+  if (!music.available) { return; }
+
+  /* The tag ships with the src so the file is already buffering.
+     CONFIG stays authoritative if you repointed it. */
+  const wanted = CONFIG.music.src;
+  if (music.element.getAttribute("src") !== wanted) {
+    music.element.src = wanted;
     music.element.load();
   }
 
@@ -1068,10 +1126,10 @@ function startMusic(silent) {
 
   if (promise && typeof promise.catch === "function") {
     promise.catch(function () {
-      if (!silent) { setMusicState(false); }
+      setMusicState(false);
+      armGestureAutoplay();
     });
   }
-  setMusicState(true);
 
   if (CONFIG.music.rememberPreference) { writeStorage("bg26:music", "on"); }
 
@@ -1110,7 +1168,6 @@ function handleMusicUnavailable() {
   /* Never try to resume this track again in this browser. */
   if (CONFIG.music.rememberPreference) {
     writeStorage("bg26:music", "off");
-    writeStorage("bg26:trackOK", "0");
   }
 
   music.button.classList.add("is-unavailable");
@@ -1119,7 +1176,7 @@ function handleMusicUnavailable() {
   music.button.setAttribute("aria-label", "Musik belum tersedia");
 
   if (music.note) {
-    music.note.textContent = "Musik belum ada — taruh file mp3 di assets/music/background.mp3";
+    music.note.textContent = "Musik belum ada — taruh file mp3 di assets/music/sparkle.mp3";
     music.note.classList.add("is-error");
     music.note.classList.remove("is-ok");
   }

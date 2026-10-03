@@ -119,9 +119,11 @@
   </div>
 </div>
 
-<!-- No src here on purpose: the music file is only requested after the
-     visitor presses play, so a missing track never logs a 404. -->
-<audio id="bgm" loop preload="none"></audio>
+<!-- The track ships with a src and preload="auto" so it is already
+     buffering while the page loads: the first play has nothing to wait
+     for. If the file is missing, the error listener in script.js turns
+     the button into a friendly "file not found" note instead. -->
+<audio id="bgm" src="./assets/music/sparkle.mp3" loop preload="auto"></audio>
 
 <main id="main">
 
@@ -251,18 +253,18 @@
           </span>
           <span class="env-cta">Open the Letter</span>
         </button>
-
-        <article
-          class="letter-paper"
-          id="letterPaper"
-          tabindex="-1"
-          aria-labelledby="letterPaperTitle">
-          <h3 class="letter-paper-title" id="letterPaperTitle">My Future Wife</h3>
-          <div class="letter-paper-body" id="letterBody"><!-- filled from CONFIG.letter --></div>
-          <p class="letter-paper-sign">Happy birthday, sayang. <span aria-hidden="true">❤️</span></p>
-          <button class="btn btn-ghost letter-close" id="letterClose" type="button">Close the letter</button>
-        </article>
       </div>
+
+      <article
+        class="letter-paper"
+        id="letterPaper"
+        tabindex="-1"
+        aria-labelledby="letterPaperTitle">
+        <h3 class="letter-paper-title" id="letterPaperTitle">My Future Wife</h3>
+        <div class="letter-paper-body" id="letterBody"><!-- filled from CONFIG.letter --></div>
+        <p class="letter-paper-sign">Happy birthday, sayang. <span aria-hidden="true">❤️</span></p>
+        <button class="btn btn-ghost letter-close" id="letterClose" type="button">Close the letter</button>
+      </article>
     </div>
   </section>
 

@@ -1532,7 +1532,9 @@ main {
   pointer-events: none;
 }
 
-.envelope.is-open .letter-paper {
+/* the paper sits beside the envelope inside the stage, so opening it
+   never stretches the envelope's aspect-ratio box. */
+.envelope.is-open + .letter-paper {
   opacity: 1;
   visibility: visible;
   top: 50%;
@@ -1977,6 +1979,9 @@ main {
   .envelope-stage { padding-block: 2.5rem 3rem; }
   .section-letter.is-reading .envelope-stage { min-height: 0; padding-block: 2rem 2.5rem; }
   .env-cta { bottom: -2.9em; font-size: .88rem; }
+  /* On phones the paper sits beside the envelope in the same stage, so
+     it grows the stage instead of stretching the envelope's box. Height
+     stays capped: only the body scrolls, the page never does. */
   .letter-paper {
     position: relative;
     left: auto;
@@ -1984,20 +1989,30 @@ main {
     bottom: auto;
     translate: none;
     width: 100%;
-    margin-top: 2.5rem;
+    margin-top: 3rem;
     transform: translate3d(0, 40px, 0) scale(.95);
     max-height: min(74vh, 560px);
-  }
-  .envelope .letter-paper,
-  .envelope.is-open .letter-paper { top: auto; bottom: auto; translate: none; }
-  .envelope:not(.is-open) .letter-paper {
-    max-height: 0;
-    padding-block: 0;
-    margin-top: 0;
     overflow: hidden;
+    transition:
+      opacity 1s var(--ease) 1.15s,
+      transform 1.4s var(--ease-soft) 1.15s,
+      visibility 0s linear 1.15s,
+      max-height .9s var(--ease) 1.15s,
+      margin-top .9s var(--ease) 1.15s,
+      padding-block .9s var(--ease) 1.15s;
+  }
+  .envelope.is-open + .letter-paper {
+    top: auto;
+    bottom: auto;
+    translate: none;
+    transition-delay: 1.15s, 1.15s, 0s, 1.15s, 1.15s, 1.15s;
+  }
+  .envelope:not(.is-open) + .letter-paper {
+    max-height: 0;
+    margin-top: 0;
+    padding-block: 0;
     transform: translate3d(0, 40px, 0) scale(.95);
   }
-  .envelope.is-open .letter-paper { transform: none; }
   .letter-paper::before { inset: 8px; }
 
   .music-text { display: none; }

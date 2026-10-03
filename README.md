@@ -75,10 +75,15 @@ letterMessage:   [ "Dear [NAMA],", "the body of your letter", "..." ],
 letterTitle: "My Future Wife",
 ```
 
-The paper has a height cap (`max-height: min(78vh, 620px)` in `.letter-paper`)
-and only the body scrolls, so the title, the sign-off and the close button stay
-put no matter how long the letter gets. Longer letters just mean more scrolling
-inside the paper.
+The paper has a height cap (`max-height: min(78vh, 620px)` in `.letter-paper`,
+`min(74vh, 560px)` on phones) and only the body scrolls, so the title, the
+sign-off and the close button stay put no matter how long the letter gets.
+Longer letters just mean more scrolling inside the paper.
+
+On a phone the paper sits *below* the envelope instead of floating over it, so
+the envelope keeps its shape instead of stretching into a long strip. Once the
+letter has opened, the page scrolls it into view for you, and closing it brings
+the envelope back.
 
 ### 5. The final surprise
 
@@ -125,17 +130,26 @@ instead of a broken image icon.
 
 ## Music (optional)
 
-1. Put an MP3 at `assets/music/background.mp3` — or point `CONFIG.music.src`
-   somewhere else.
+1. Put an MP3 at `assets/music/sparkle.mp3` — or point `CONFIG.music.src` **and**
+   the `src` on the `<audio>` tag in `index.html` somewhere else.
 2. Turn the corner speaker on, bottom-right.
 
-The current track is `background.mp3` (~3:50, "One Less Lonely Girl"). Nothing
-plays automatically and no request is made until you press play, so a missing
-file never breaks the page. If the track can't be found, the button disables
-itself and tells you where to put the file, then stays out of your way.
+The current track is `sparkle.mp3` (3:02, 128 kbps, ~2.8 MB).
 
-Prefer a different file type? Change the `type` attribute on the `<audio>`
-element in `index.html` to match.
+The file is requested as soon as the page starts loading (`preload="auto"`),
+so it is already buffering while the hero paints — the first play has nothing
+to wait for. The music then starts on its own wherever the browser allows it
+(typically on a returning visit) and, where autoplay is blocked, on the
+visitor's first tap, click or scroll. Anyone who switched it off is never
+started again against their will.
+
+If the track can't be found, the button disables itself and tells you where
+to put the file, then stays out of your way.
+
+Two things decide how fast the sound arrives: total file size, and any ID3
+tag at the front of the file. Album art can put a full megabyte before the
+first audio frame, and the browser has to download all of it before a single
+second plays — so strip heavy tags when you export.
 
 ---
 
